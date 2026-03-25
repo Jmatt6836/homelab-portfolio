@@ -83,6 +83,29 @@ sudo usermod -aG sudo john
 ![User and group setup](screenshots/Permissions1.png)
 ![Permission denied and access control](screenshots/Permissions2.png)
 
+### 6. Bash Scripting & Cron Automation
+- Written a bash script to automatically back up the Apache web 
+  directory (`/var/www/html`) and log the result
+- Script creates a timestamped `.tar.gz` archive in `/backup`
+- Appends a completion entry to `/var/log/backup.log` on every run
+- Scheduled the script to run automatically daily at 2:00am using cron
+```bash
+#!/bin/bash
+DATE=$(date +%F)
+SOURCE="/var/www/html"
+DEST="/backup"
+LOGFILE="/var/log/backup.log"
+
+mkdir -p $DEST
+tar -czf $DEST/backup-$DATE.tar.gz $SOURCE
+echo "Backup completed: $DATE" >> $LOGFILE
+echo "Backup saved to: $DEST/backup-$DATE.tar.gz" >> $LOGFILE
+```
+
+![Backup script output and log](screenshots/backup-log.png)
+![Cron job scheduled](screenshots/cron.png)
+
+
 ## Skills Demonstrated
 - Linux server installation and administration
 - Package management with apt
@@ -92,6 +115,9 @@ sudo usermod -aG sudo john
 - User and group management
 - Role-based access control (RBAC)
 - File permissions and least privilege
+- Bash scripting and automation
+- Task scheduling with cron
+- System backup procedures
 - VirtualBox VM networking
 
 ## What I Learned
@@ -108,6 +134,12 @@ and chown showed me how enterprises control who can access what at
 the filesystem level. Seeing a permission denied error on a restricted 
 file — and understanding exactly why it was denied — was more valuable 
 than any multiple choice question on the Security+ exam.
+
+Writing and scheduling the backup script was my first real taste of 
+automation thinking — instead of manually running a task, you define 
+it once and let the system handle it. Understanding cron syntax also 
+gave me a practical answer to a common interview question. Automation 
+like this is foundational to both sysadmin and DevOps roles.
 
 ## Next Steps
 - Bash scripting and cron job automation
