@@ -105,6 +105,30 @@ echo "Backup saved to: $DEST/backup-$DATE.tar.gz" >> $LOGFILE
 ![Backup script output and log](screenshots/backup-log.png)
 ![Cron job scheduled](screenshots/cron.png)
 
+### 7. System Monitoring & Log Analysis
+- Monitored live system resources using `htop` (CPU, RAM, processes)
+- Checked disk usage with `df -h` and `du`
+- Monitored memory with `free -h`
+- Streamed live system logs with `tail -f /var/log/syslog`
+- Investigated failed SSH login attempts using `journalctl`
+- Identified attempted usernames ranked by frequency — simulating 
+  basic brute force detection
+```bash
+htop
+df -h
+free -h
+sudo tail -f /var/log/syslog
+sudo journalctl -u ssh | grep "Failed"
+sudo journalctl -u ssh | grep "Failed" | awk '{print $11}' | sort | uniq -c | sort -rn
+```
+
+> **Note:** Ubuntu 22.04 routes SSH logs to the systemd journal rather
+> than `/var/log/auth.log` — discovered this through troubleshooting
+> and adjusted commands accordingly.
+
+![Failed SSH login attempts](screenshots/auth-log.png)
+![Live system log](screenshots/syslog.png)
+
 
 ## Skills Demonstrated
 - Linux server installation and administration
@@ -118,6 +142,9 @@ echo "Backup saved to: $DEST/backup-$DATE.tar.gz" >> $LOGFILE
 - Bash scripting and automation
 - Task scheduling with cron
 - System backup procedures
+- System monitoring and resource analysis
+- Log analysis and failed login detection
+- Troubleshooting and adapting to OS-specific configurations
 - VirtualBox VM networking
 
 ## What I Learned
@@ -141,7 +168,12 @@ it once and let the system handle it. Understanding cron syntax also
 gave me a practical answer to a common interview question. Automation 
 like this is foundational to both sysadmin and DevOps roles.
 
+During log analysis I discovered that Ubuntu 22.04 routes SSH 
+authentication logs to the systemd journal rather than the traditional 
+`auth.log` file. Having to troubleshoot this and find the correct 
+command reinforced that real IT work rarely goes exactly as documented 
+— knowing how to adapt and find solutions is just as important as 
+knowing the commands.
+
 ## Next Steps
-- Bash scripting and cron job automation
-- System monitoring and log analysis
 - Integration with Wazuh SIEM for centralized logging
