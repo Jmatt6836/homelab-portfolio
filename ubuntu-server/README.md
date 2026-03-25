@@ -61,12 +61,37 @@ sudo ufw status verbose
 
 ![UFW firewall rules](screenshots/ufw.png)
 
+### 5. User & Permission Management
+- Created users `john` and `jane` to simulate employee onboarding
+- Created `itstaff` group and assigned both users to it
+- Created `/shared` directory owned by `itstaff` group with `770` permissions
+- Verified non-group members cannot access restricted directories
+- Granted `john` sudo privileges, leaving `jane` as a standard user
+- Demonstrated role-based access control (RBAC) principles
+```bash
+sudo adduser john
+sudo adduser jane
+sudo groupadd itstaff
+sudo usermod -aG itstaff john
+sudo usermod -aG itstaff jane
+sudo mkdir /shared
+sudo chown root:itstaff /shared
+sudo chmod 770 /shared
+sudo usermod -aG sudo john
+```
+
+![User and group setup](screenshots/Permissions1.png)
+![Permission denied and access control](screenshots/Permissions2.png)
+
 ## Skills Demonstrated
 - Linux server installation and administration
 - Package management with apt
 - Web server deployment and configuration
 - SSH remote access and port forwarding
 - Firewall policy design and implementation
+- User and group management
+- Role-based access control (RBAC)
+- File permissions and least privilege
 - VirtualBox VM networking
 
 ## What I Learned
@@ -76,8 +101,15 @@ and explicitly blocking known insecure protocols. Managing the server
 entirely through SSH mirrors how real production servers are 
 administered in enterprise environments.
 
+Working through user and permission management made the concept of 
+role-based access control (RBAC) click in a practical way. Creating 
+groups, assigning users, and setting directory permissions with chmod 
+and chown showed me how enterprises control who can access what at 
+the filesystem level. Seeing a permission denied error on a restricted 
+file — and understanding exactly why it was denied — was more valuable 
+than any multiple choice question on the Security+ exam.
+
 ## Next Steps
-- User and permission management
 - Bash scripting and cron job automation
 - System monitoring and log analysis
 - Integration with Wazuh SIEM for centralized logging
