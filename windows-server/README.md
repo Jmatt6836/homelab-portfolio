@@ -34,6 +34,7 @@ Get-ADDomainController
 ```
 
 ![Active Directory domain confirmed](screenshots/ad-domain.png)
+![Domain Controller details](screenshots/ad-dc.png)
 
 ### 3. Organizational Units, Users & Groups
 - Created three Organizational Units simulating company departments:
