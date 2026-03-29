@@ -24,27 +24,31 @@ skills in Linux administration, networking, and security.
 
 
 
-\## Projects
+## Projects
 
+### Ubuntu Server 22.04 ✅
+- Installed and configured Ubuntu Server 22.04 LTS in VirtualBox
+- Deployed Apache web server, verified via port forwarding
+- Configured SSH remote access from Windows host via PowerShell
+- Configured UFW firewall with default deny policy, whitelisted
+  SSH/HTTP/HTTPS, explicitly blocked Telnet (port 23)
+- Created users, groups, and file permissions simulating RBAC
+- Automated backups with bash scripting and cron scheduling
+- Performed system monitoring and log analysis via journalctl
 
+[View full writeup →](ubuntu-server/README.md)
 
-\### Ubuntu Server 22.04
+### Windows Server 2022 & Active Directory ✅
+- Deployed Windows Server 2022 and promoted to Domain Controller
+- Created lab.local domain with HR, IT, and Management OUs
+- Created domain users and IT-Staff security group
+- Configured Group Policy with password policy and login banner
+- Verified AD configuration via PowerShell
 
-\- Installed and configured Ubuntu Server in VirtualBox
+[View full writeup →](windows-server/README.md)
 
-\- Deployed Apache web server and verified HTTP connectivity
-
-\- Configured port forwarding for external VM access
-
-\- \[View writeup](ubuntu-server/README.md)
-
-
-
-\## In Progress
-
-\- Windows Server 2022 / Active Directory
-
-\- pfSense firewall
-
-\- AWS cloud infrastructure
+## In Progress
+- **pfSense Firewall** — VLAN segmentation, firewall rules, network monitoring
+- **AWS Cloud Infrastructure** — EC2, VPC, IAM, CloudWatch (free tier)
+- **Wazuh SIEM** — centralized log collection across all VMs
 
