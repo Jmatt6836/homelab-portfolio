@@ -69,6 +69,54 @@ Get-ADDomainController
 ![GPO password policy](screenshots/gpo-password.png)
 ![GPO login security banner](screenshots/gpo-banner.png)
 
+### 5. DNS Configuration & Verification
+- Confirmed `lab.local` as a Primary DNS zone integrated with AD
+- Verified SOA record and domain controller registration
+- Confirmed all Active Directory SRV records present — Kerberos, LDAP, Global Catalog all registered correctly
+- Tested DNS resolution using nslookup and PowerShell
+```powershell
+Get-DnsServerZone
+Resolve-DnsName lab.local
+nslookup lab.local 127.0.0.1
+Get-DnsServerResourceRecord -ZoneName "lab.local"
+```
+
+![DNS verification](screenshots/dns-verification2.png)
+
+### 6. DHCP Server Configuration
+- Installed DHCP Server role via Server Manager
+- Authorized DHCP server in Active Directory
+- Created `Lab Network` scope covering `192.168.1.100–192.168.1.200`
+- Configured scope options:
+  - Option 003: Router — `192.168.1.1`
+  - Option 006: DNS Server — `192.168.1.10` (domain controller)
+  - Option 015: DNS Domain Name — `lab.local`
+- Activated scope and verified address pool
+
+![DHCP address pool](screenshots/dhcp-scope.png)
+![DHCP scope options](screenshots/dhcp-options.png)
+
+### 7. Ubuntu Server Joined to Domain
+- Configured Ubuntu Server's internal network adapter with static IP `192.168.1.50` on the lab network
+- Pointed Ubuntu DNS to Windows Server at `192.168.1.10`
+- Verified network connectivity between VMs via ping
+- Installed realm, sssd, adcli, and Kerberos packages on Ubuntu
+- Discovered and joined `lab.local` domain using realm join
+- Verified domain membership from Ubuntu — `configured: kerberos-member`
+- Verified from Windows Server — Ubuntu visible in AD Computers container
+- Confirmed cross-platform AD authentication — Ubuntu resolving domain users and their full group memberships from Active Directory
+```bash
+sudo realm discover lab.local
+sudo realm join -U Administrator lab.local
+realm list
+id Administrator@lab.local
+```
+
+![Ubuntu domain discovery](screenshots/domain-discover.png)
+![Ubuntu joined to lab.local domain](screenshots/domain-join.png)
+![Domain computers in Active Directory](screenshots/domain-computers.png)
+![Cross-platform AD authentication](screenshots/domain-auth.png)
+
 ## Skills Demonstrated
 - Windows Server 2022 installation and configuration
 - Active Directory Domain Services (AD DS) setup
@@ -79,32 +127,21 @@ Get-ADDomainController
 - Group Policy Object (GPO) creation and configuration
 - Password policy implementation
 - Login banner and security messaging via GPO
-- PowerShell for AD verification
-- VirtualBox VM configuration for Windows environments
+- DNS server configuration and verification
+- DHCP scope creation and option configuration
+- Static IP assignment on Windows Server
+- Linux-Windows domain integration (realm/sssd/Kerberos)
+- Cross-platform Active Directory authentication
+- PowerShell for AD and network verification
+- VirtualBox internal network configuration
 
 ## What I Learned
-Setting up Active Directory from scratch gave me a deep appreciation 
-for how enterprise identity management actually works. Every corporate 
-network I'll ever support will have AD at its core — understanding how 
-domains, OUs, users, and groups relate to each other is foundational 
-knowledge for any IT support or sysadmin role.
-
-Configuring Group Policy was particularly valuable because it 
-connected directly to my Security+ knowledge around access control 
-and security policy enforcement. The password policy settings I 
-configured — complexity requirements, history enforcement, maximum 
-age — are real industry standards that organizations use to comply 
-with security frameworks like NIST and CIS benchmarks.
-
-The login banner GPO was a small but meaningful detail — in a real 
-environment this is a legal requirement in many organizations, 
-notifying users that activity is monitored before they authenticate. 
-Knowing why these policies exist, not just how to configure them, 
-is what separates someone who understands security from someone who 
-just follows instructions.
+Setting up Active Directory from scratch gave me a deep appreciation for how enterprise identity management actually works. Every corporate network I'll ever support will have AD at its core — understanding how domains, OUs, users, and groups relate to each other is foundational knowledge for any IT support or sysadmin role.
+Configuring Group Policy connected directly to my Security+ knowledge around access control and security policy enforcement. The password policy settings I configured — complexity requirements, history enforcement, maximum age — are real industry standards that organizations use to comply with security frameworks like NIST and CIS benchmarks.
+DNS and DHCP configuration showed me how the two services work together in an enterprise environment — DHCP hands out IP addresses and tells clients where the DNS server is, DNS resolves hostnames to IPs, and Active Directory relies on both to function. Seeing all three services working together made the relationship between them click in a way that studying for certs alone never did.
+Joining Ubuntu Server to the Windows domain was the most technically challenging and rewarding part of this project. Getting a Linux machine to authenticate against Windows Active Directory requires understanding Kerberos, SSSD, realm discovery, and cross-platform networking simultaneously. The fact that Ubuntu could query AD group memberships — showing domain admins, schema admins, and enterprise admins — confirmed that the integration was complete and working at a production level. This is the kind of hybrid environment skill that employers in enterprise IT look for and rarely find in entry-level candidates.
 
 ## Next Steps
-- Configure DNS zones and records
-- Set up DHCP scope for the lab network
-- Join Ubuntu Server VM to the lab.local domain
-- Install Wazuh SIEM agent to collect Windows event logs
+- Configure pfSense firewall between VMs
+- Install Wazuh SIEM agents on both VMs for centralized logging
+- Deploy AWS cloud infrastructure project Sonnet 4.6
