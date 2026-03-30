@@ -41,4 +41,4 @@ A self-built virtualized IT lab environment documenting hands-on skills in Linux
 IT graduate (B.S. Computer Information Technology, BYU-Idaho) with CompTIA Security+ and AWS Cloud Practitioner certifications. Building this lab to develop hands-on skills across system administration, networking, and security. Bilingual English/Spanish — open to entry-level roles in IT support, cybersecurity, networking, or cloud operations.
 
 📧 Joshskouson@gmail.com
-🔗 [LinkedIn](https://www.linkedin.com/in/josh-skouson-97482b340/)
+🔗 [LinkedIn]((https://www.linkedin.com/in/joshskouson/))
