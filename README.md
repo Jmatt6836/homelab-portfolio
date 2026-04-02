@@ -32,10 +32,19 @@ A self-built virtualized IT lab environment documenting hands-on skills in Linux
 
 [View full writeup →](windows-server/README.md)
 
+### AWS Cloud Infrastructure ✅
+- Built VPC with public and private subnets, route tables, and internet gateway
+- Deployed EC2 instance running Apache web server, accessible from internet
+- Configured security groups with least privilege — SSH restricted to personal IP
+- Created IAM role with CloudWatch permissions attached to EC2 instance
+- Set up CloudWatch CPU alarm with SNS email notification
+- Enabled MFA on root account, all work performed through IAM user
+
+[View full writeup →](aws/README.md)
+
 ## In Progress
 - **pfSense Firewall** — VLAN segmentation, firewall rules, network monitoring
-- **AWS Cloud Infrastructure** — EC2, VPC, IAM, CloudWatch (free tier)
-- **Wazuh SIEM** — centralized log collection across all VMs
+- **Wazuh SIEM** — centralized log collection across all VMs and AWS
 
 ## About
 IT graduate (B.S. Computer Information Technology, BYU-Idaho) with CompTIA Security+ and AWS Cloud Practitioner certifications. Building this lab to develop hands-on skills across system administration, networking, and security. Bilingual English/Spanish — open to entry-level roles in IT support, cybersecurity, networking, or cloud operations.
