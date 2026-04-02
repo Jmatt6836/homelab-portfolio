@@ -17,6 +17,8 @@ Deployed a cloud infrastructure project on AWS using the free tier, demonstratin
 - Disabled root account for day-to-day use — all work performed through IAM user
 - Applied principle of least privilege from initial account setup
 
+   ![MFA enabled on root account](screenshots/mfa-setup.png)
+
 ### 2. VPC & Network Architecture
 - Created `lab-vpc` using VPC and more wizard
 - Configured CIDR block `10.0.0.0/16`
