@@ -1,10 +1,11 @@
 # Home Lab Portfolio
 
-A self-built virtualized IT lab environment documenting hands-on skills in Linux administration, networking, and security.
+A self-built virtualized IT lab environment documenting hands-on skills in Linux administration, Windows Server, networking, cloud infrastructure, and security.
 
 ## Environment
 - **Host OS:** Windows, 32GB RAM
 - **Hypervisor:** VirtualBox
+- **Cloud:** AWS (us-east-2)
 - **Certifications:** CompTIA Security+, AWS Cloud Practitioner
 - **Location:** Las Vegas, NV — open to relocation to Phoenix, AZ or Austin, TX
 
@@ -42,9 +43,18 @@ A self-built virtualized IT lab environment documenting hands-on skills in Linux
 
 [View full writeup →](aws/README.md)
 
+### pfSense Firewall ✅
+- Deployed pfSense 2.7.2 CE as a virtual firewall in VirtualBox
+- Configured WAN and LAN interfaces integrating with existing lab network
+- Created custom firewall rules — blocked Telnet, allowed RDP and DNS to domain controller only
+- Implemented VLAN 10 (Management VLAN) for network segmentation
+- Enabled traffic logging — verified live firewall blocking unsolicited inbound connections
+- Integrated with lab.local domain using Windows Server as DNS
+
+[View full writeup →](pfsense/README.md)
+
 ## In Progress
-- **pfSense Firewall** — VLAN segmentation, firewall rules, network monitoring
-- **Wazuh SIEM** — centralized log collection across all VMs and AWS
+- **Wazuh SIEM** — centralized log collection across all VMs and pfSense firewall
 
 ## About
 IT graduate (B.S. Computer Information Technology, BYU-Idaho) with CompTIA Security+ and AWS Cloud Practitioner certifications. Building this lab to develop hands-on skills across system administration, networking, and security. Bilingual English/Spanish — open to entry-level roles in IT support, cybersecurity, networking, or cloud operations.
