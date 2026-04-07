@@ -96,6 +96,16 @@ Get-DnsServerResourceRecord -ZoneName "lab.local"
 ![DHCP address pool](screenshots/dhcp-scope.png)
 ![DHCP scope options](screenshots/dhcp-options.png)
 
+### 6b. DNS Records & Dynamic Registration
+- Verified forward lookup zone showing all registered hosts in lab.local
+- Windows Server domain controller registered at `192.168.1.10`
+- Ubuntu Server (HOME-TEST) automatically registered at `192.168.1.50` upon domain join — demonstrating dynamic DNS update working correctly as part of AD membership
+- DHCP address leases empty as expected — all lab servers use static IPs, which is correct practice for server infrastructure
+
+![DNS zone showing all registered hosts](screenshots/dns-zones.png)
+![Ubuntu dynamically registered in DNS](screenshots/dns-ubuntu-record.png)
+![DHCP address leases](screenshots/dhcp-leases.png)
+
 ### 7. Ubuntu Server Joined to Domain
 - Configured Ubuntu Server's internal network adapter with static IP `192.168.1.50` on the lab network
 - Pointed Ubuntu DNS to Windows Server at `192.168.1.10`
@@ -134,14 +144,28 @@ id Administrator@lab.local
 - Cross-platform Active Directory authentication
 - PowerShell for AD and network verification
 - VirtualBox internal network configuration
+- DNS forward lookup zone management
+- Manual and dynamic DNS record registration
+- Static IP planning for server infrastructure
 
 ## What I Learned
 Setting up Active Directory from scratch gave me a deep appreciation for how enterprise identity management actually works. Every corporate network I'll ever support will have AD at its core — understanding how domains, OUs, users, and groups relate to each other is foundational knowledge for any IT support or sysadmin role.
 Configuring Group Policy connected directly to my Security+ knowledge around access control and security policy enforcement. The password policy settings I configured — complexity requirements, history enforcement, maximum age — are real industry standards that organizations use to comply with security frameworks like NIST and CIS benchmarks.
 DNS and DHCP configuration showed me how the two services work together in an enterprise environment — DHCP hands out IP addresses and tells clients where the DNS server is, DNS resolves hostnames to IPs, and Active Directory relies on both to function. Seeing all three services working together made the relationship between them click in a way that studying for certs alone never did.
+Watching Ubuntu automatically register itself in Windows DNS after 
+joining the domain was a satisfying moment — it confirmed that the 
+AD integration was working at a deeper level than just authentication. 
+In a real enterprise environment this is how IT teams track which 
+devices are on the network and ensure hostname resolution works 
+correctly across all systems. The empty DHCP leases view also 
+reinforced an important principle — servers should always use static 
+IPs so their addresses never change unexpectedly, while DHCP is 
+reserved for client devices like workstations and laptops.
 Joining Ubuntu Server to the Windows domain was the most technically challenging and rewarding part of this project. Getting a Linux machine to authenticate against Windows Active Directory requires understanding Kerberos, SSSD, realm discovery, and cross-platform networking simultaneously. The fact that Ubuntu could query AD group memberships — showing domain admins, schema admins, and enterprise admins — confirmed that the integration was complete and working at a production level. This is the kind of hybrid environment skill that employers in enterprise IT look for and rarely find in entry-level candidates.
 
+
 ## Next Steps
-- Configure pfSense firewall between VMs
-- Install Wazuh SIEM agents on both VMs for centralized logging
-- Deploy AWS cloud infrastructure project Sonnet 4.6
+- Install Wazuh SIEM agent on Windows Server to collect event logs centrally
+- Install Wazuh SIEM agent on Ubuntu Server for centralized Linux log monitoring
+- Configure pfSense to forward firewall logs to Wazuh manager
+- Explore Group Policy automation for software deployment across domain
