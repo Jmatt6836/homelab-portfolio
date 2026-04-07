@@ -149,20 +149,46 @@ id Administrator@lab.local
 - Static IP planning for server infrastructure
 
 ## What I Learned
-Setting up Active Directory from scratch gave me a deep appreciation for how enterprise identity management actually works. Every corporate network I'll ever support will have AD at its core — understanding how domains, OUs, users, and groups relate to each other is foundational knowledge for any IT support or sysadmin role.
-Configuring Group Policy connected directly to my Security+ knowledge around access control and security policy enforcement. The password policy settings I configured — complexity requirements, history enforcement, maximum age — are real industry standards that organizations use to comply with security frameworks like NIST and CIS benchmarks.
-DNS and DHCP configuration showed me how the two services work together in an enterprise environment — DHCP hands out IP addresses and tells clients where the DNS server is, DNS resolves hostnames to IPs, and Active Directory relies on both to function. Seeing all three services working together made the relationship between them click in a way that studying for certs alone never did.
-Watching Ubuntu automatically register itself in Windows DNS after 
-joining the domain was a satisfying moment — it confirmed that the 
-AD integration was working at a deeper level than just authentication. 
-In a real enterprise environment this is how IT teams track which 
-devices are on the network and ensure hostname resolution works 
-correctly across all systems. The empty DHCP leases view also 
-reinforced an important principle — servers should always use static 
-IPs so their addresses never change unexpectedly, while DHCP is 
-reserved for client devices like workstations and laptops.
-Joining Ubuntu Server to the Windows domain was the most technically challenging and rewarding part of this project. Getting a Linux machine to authenticate against Windows Active Directory requires understanding Kerberos, SSSD, realm discovery, and cross-platform networking simultaneously. The fact that Ubuntu could query AD group memberships — showing domain admins, schema admins, and enterprise admins — confirmed that the integration was complete and working at a production level. This is the kind of hybrid environment skill that employers in enterprise IT look for and rarely find in entry-level candidates.
 
+Setting up Active Directory from scratch gave me a deep appreciation 
+for how enterprise identity management actually works. Every corporate 
+network I'll ever support will have AD at its core — understanding how 
+domains, OUs, users, and groups relate to each other is foundational 
+knowledge for any IT support or sysadmin role.
+
+Configuring Group Policy connected directly to my Security+ knowledge 
+around access control and security policy enforcement. The password 
+policy settings I configured — complexity requirements, history 
+enforcement, maximum age — are real industry standards that 
+organizations use to comply with security frameworks like NIST and 
+CIS benchmarks.
+
+DNS and DHCP configuration showed me how the two services work 
+together in an enterprise environment — DHCP hands out IP addresses 
+and tells clients where the DNS server is, DNS resolves hostnames to 
+IPs, and Active Directory relies on both to function. Seeing all three 
+services working together made the relationship between them click in 
+a way that studying for certs alone never did.
+
+Watching Ubuntu automatically register itself in Windows DNS after 
+joining the domain was a satisfying moment — it confirmed that the AD 
+integration was working at a deeper level than just authentication. In 
+a real enterprise environment this is how IT teams track which devices 
+are on the network and ensure hostname resolution works correctly 
+across all systems. The empty DHCP leases view also reinforced an 
+important principle — servers should always use static IPs so their 
+addresses never change unexpectedly, while DHCP is reserved for 
+client devices like workstations and laptops.
+
+Joining Ubuntu Server to the Windows domain was the most technically 
+challenging and rewarding part of this project. Getting a Linux machine 
+to authenticate against Windows Active Directory requires understanding 
+Kerberos, SSSD, realm discovery, and cross-platform networking 
+simultaneously. The fact that Ubuntu could query AD group memberships 
+— showing domain admins, schema admins, and enterprise admins — 
+confirmed that the integration was complete and working at a production 
+level. This is the kind of hybrid environment skill that employers in 
+enterprise IT look for and rarely find in entry-level candidates.
 
 ## Next Steps
 - Install Wazuh SIEM agent on Windows Server to collect event logs centrally
