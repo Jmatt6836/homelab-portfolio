@@ -53,8 +53,15 @@ A self-built virtualized IT lab environment documenting hands-on skills in Linux
 
 [View full writeup →](pfsense/README.md)
 
-## In Progress
-- **Wazuh SIEM** — centralized log collection across all VMs and pfSense firewall
+### Wazuh SIEM ✅
+- Deployed Wazuh 4.7.5 as a centralized SIEM monitoring the entire lab environment
+- Installed agents on Ubuntu Server and Windows Server 2022
+- Generated and analyzed 492 security alerts across both systems
+- MITRE ATT&CK technique mapping — Valid Accounts, Sudo caching, Disable or Modify Tools
+- CIS Microsoft Windows Server 2022 Benchmark — 127 passed, 212 failed
+- Real-time authentication event monitoring and security event correlation
+
+[View full writeup →](wazuh/README.md)
 
 ## About
 IT graduate (B.S. Computer Information Technology, BYU-Idaho) with CompTIA Security+ and AWS Cloud Practitioner certifications. Building this lab to develop hands-on skills across system administration, networking, and security. Bilingual English/Spanish — open to entry-level roles in IT support, cybersecurity, networking, or cloud operations.
