@@ -3,6 +3,15 @@
 ## Overview
 Deployed pfSense 2.7.2 Community Edition in VirtualBox as a virtual firewall and router for the home lab environment. Configured WAN and LAN interfaces, created custom firewall rules enforcing least privilege network access, implemented VLAN segmentation, and enabled traffic logging — simulating a real enterprise perimeter firewall setup.
 
+## What This Demonstrates
+- Virtual firewall deployment and network interface configuration
+- Firewall rule creation and ordering following principle of least privilege
+- VLAN segmentation and management plane isolation
+- Traffic logging and real-time firewall monitoring
+- Perimeter security concepts — default deny, explicit allow
+- Integration of firewall infrastructure with existing AD domain
+- VirtualBox network adapter configuration for multi-interface setups
+
 ## Environment
 - **OS:** pfSense 2.7.2-RELEASE (FreeBSD 14.0)
 - **Hypervisor:** VirtualBox (Windows host, 32GB RAM)
