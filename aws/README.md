@@ -3,6 +3,16 @@
 ## Overview
 Deployed a cloud infrastructure project on AWS using the free tier, demonstrating hands-on experience with core AWS services including VPC networking, EC2 compute, IAM security, and CloudWatch monitoring. This project complements my AWS Cloud Practitioner certification with practical, real-world implementation.
 
+## What This Demonstrates
+- AWS VPC design including public and private subnet architecture
+- EC2 instance deployment with automated configuration via user data
+- Security group configuration following principle of least privilege
+- IAM role creation and instance profile attachment
+- CloudWatch alarm configuration and SNS notification setup
+- AWS account security best practices — MFA, IAM users, root account protection
+- Cloud cost awareness and billing monitoring
+- Real-world cloud infrastructure documentation
+
 ## Environment
 - **Cloud Provider:** Amazon Web Services (AWS)
 - **Region:** us-east-2 (Ohio)
