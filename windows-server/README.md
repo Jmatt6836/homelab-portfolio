@@ -6,6 +6,15 @@ Domain Controller, simulating a real enterprise Active Directory
 environment. Configured organizational structure, user accounts, 
 security groups, and Group Policy Objects.
 
+## What This Demonstrates
+- Active Directory domain deployment and management
+- DNS and DHCP integration in an enterprise environment
+- Group Policy security enforcement and compliance
+- Cross-platform authentication (Linux + Windows via Kerberos/SSSD)
+- Network service validation and troubleshooting
+- Domain Controller promotion and forest creation
+- Hybrid environment administration
+
 ## Environment
 - **OS:** Windows Server 2022 Standard Evaluation
 - **Hypervisor:** VirtualBox (Windows host, 32GB RAM)
@@ -147,6 +156,23 @@ id Administrator@lab.local
 - DNS forward lookup zone management
 - Manual and dynamic DNS record registration
 - Static IP planning for server infrastructure
+
+  ## Troubleshooting & Challenges
+- **Static IP not persisting on Windows Server** — initial static IP assignment via `New-NetIPAddress` didn't stick after reboot. Resolved by removing the existing IP configuration first with `Remove-NetIPAddress` before reassigning
+- **Ubuntu couldn't reach Windows Server** — ping to 192.168.1.10 failing due to Ubuntu's internal network adapter (enp0s8) being DOWN with no IP assigned. Fixed by configuring netplan permanently so the static IP survives reboots
+- **DHCP scope showing old APIPA address** — the DNS server option in the DHCP scope was initially configured with the 169.254.x.x APIPA address instead of the static IP. Removed and reconfigured after setting the correct static IP
+- **ISO boot error on Windows Server install** — initial install failed because the ISO was attached to a SATA controller instead of IDE. Fixed by adding a PIIX4 IDE controller and reattaching the ISO
+- **Ctrl+Alt+Del on VM** — discovered that VirtualBox intercepts Ctrl+Alt+Del before it reaches the VM. Resolved using Input → Keyboard → Insert Ctrl-Alt-Del from the VirtualBox menu
+
+  ## Results / Validation
+- Windows Server 2022 successfully promoted to Domain Controller
+- lab.local domain created with three OUs, four users, and one security group
+- Group Policy password policy and login banner confirmed active
+- DNS verified via PowerShell — all AD SRV records present
+- DHCP scope active with correct router, DNS, and domain name options
+- Ubuntu Server successfully joined to lab.local via Kerberos/SSSD
+- Cross-platform AD authentication confirmed — domain group memberships visible from Linux
+- Ubuntu dynamically registered in Windows DNS upon domain join
 
 ## What I Learned
 
