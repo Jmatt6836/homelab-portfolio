@@ -123,3 +123,6 @@ Internet
 - Configure pfSense to forward syslog to Wazuh manager
 - Add additional firewall rules as lab complexity grows
 - Explore pfSense IDS/IPS features using Snort or Suricata package
+- - **Wazuh syslog integration configured** — pfSense remote logging pointed at 
+  Wazuh manager (192.168.1.20:514). Full log visibility pending routing 
+  reconfiguration to direct lab traffic through pfSense as default gateway.
