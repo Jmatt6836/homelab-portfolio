@@ -9,6 +9,8 @@ A self-built virtualized IT lab environment documenting hands-on skills in Linux
 - **Certifications:** CompTIA Security+, AWS Cloud Practitioner
 - **Location:** Las Vegas, NV — open to relocation to Phoenix, AZ or Austin, TX
 
+  ![Lab Architecture Diagram](lab-architecture.png)
+
 ## Projects
 
 ### Ubuntu Server 22.04 ✅
