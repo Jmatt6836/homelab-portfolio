@@ -6,6 +6,16 @@ of a self-built home lab environment. This project simulates a
 basic enterprise Linux server setup covering web services, remote 
 administration, and firewall security.
 
+## What This Demonstrates
+- Linux server installation and administration from scratch
+- Web server deployment and verification
+- Remote administration via SSH
+- Firewall policy design using UFW
+- Role-based access control at the filesystem level
+- Bash scripting and task automation with cron
+- System monitoring and log analysis
+- Troubleshooting OS-specific configurations in a real environment
+  
 ## Environment
 - **OS:** Ubuntu Server 22.04 LTS
 - **Hypervisor:** VirtualBox (Windows host, 32GB RAM)
@@ -146,6 +156,12 @@ sudo journalctl -u ssh | grep "Failed" | awk '{print $11}' | sort | uniq -c | so
 - Log analysis and failed login detection
 - Troubleshooting and adapting to OS-specific configurations
 - VirtualBox VM networking
+
+  ## Troubleshooting & Challenges
+- **Downloaded Desktop instead of Server ISO** — initially downloaded Ubuntu Desktop instead of Ubuntu Server. Recognized the difference, re-downloaded the correct Server ISO before proceeding
+- **Apache not reachable from host browser** — web server was running but the 10.0.2.x NAT address isn't directly accessible from the host. Resolved by configuring VirtualBox port forwarding (host 8080 → guest 80)
+- **SSH logs not in auth.log** — Ubuntu 22.04 routes SSH authentication logs to the systemd journal rather than /var/log/auth.log as expected. Discovered through troubleshooting and switched to `journalctl -u ssh` for log analysis
+- **Failed SSH login attempts not appearing** — initially showed zero failed attempts because the correct log location hadn't been identified yet. Resolved after finding the systemd journal and generating test failed attempts
 
 ## What I Learned
 Configuring UFW reinforced the principle of least privilege from 
