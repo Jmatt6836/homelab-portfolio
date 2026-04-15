@@ -104,6 +104,13 @@ Get-Service WazuhSvc
 - Authentication event monitoring
 - Security event documentation
 
+  ## Troubleshooting & Challenges
+- **OS compatibility warning** — Wazuh 4.7.5 installer flagged Ubuntu 24.04 as unsupported. Resolved by using the `-i` flag to bypass the compatibility check — installation completed successfully and all services ran correctly
+- **Agent version mismatch** — initial Ubuntu agent installation pulled version 4.14.4 which was higher than the manager version 4.7.5. Wazuh requires agent version to be equal to or lower than the manager. Resolved by explicitly installing `wazuh-agent=4.7.5-1`
+- **Ubuntu agent not appearing in dashboard** — agent was installed and running but not connecting to the manager. Root cause was the internal network adapter (enp0s8) being DOWN with no IP assigned. Fixed by configuring netplan to permanently assign 192.168.1.50 to enp0s8
+- **Windows Server couldn't download agent** — Windows Server has no direct internet access since it's on the internal network only. Resolved by downloading the MSI on the host machine and transferring it via VirtualBox shared folder
+- **Static IP on Ubuntu not surviving reboots** — IP addresses set with `ip addr add` are not persistent. Permanently fixed by editing `/etc/netplan/50-cloud-init.yaml` to include the static IP configuration for enp0s8
+
 ## What I Learned
 Deploying Wazuh brought everything in the lab together into a single monitoring platform. Seeing alerts from Windows Server and Ubuntu simultaneously — with MITRE ATT&CK technique mapping — made the concept of a SOC dashboard tangible in a way that studying for Security+ never did. Each alert tells a story about what happened on a system, when it happened, and how it maps to known attacker techniques.
 
