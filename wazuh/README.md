@@ -134,7 +134,12 @@ Internet
 ```
 
 ## Next Steps
-- Configure pfSense syslog forwarding to Wazuh for firewall log monitoring
+- **pfSense syslog forwarding configured** — pfSense remote logging enabled 
+  pointing to Wazuh manager at 192.168.1.20:514. Wazuh configured to listen 
+  for syslog on UDP port 514 via ossec.conf. Full firewall log integration 
+  requires lab traffic to route through pfSense as the default gateway rather 
+  than directly through VirtualBox NAT — planned for future network 
+  reconfiguration.
 - Create custom Wazuh rules for lab-specific alerts
 - Explore Wazuh active response for automated threat remediation
 - Investigate and remediate CIS benchmark failures on Windows Server
